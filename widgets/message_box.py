@@ -44,4 +44,3 @@ class SerialMessageBox(RichLog, can_focus=False):
         )
 
         self.write(message)
-

@@ -1,13 +1,12 @@
 import asyncio
 
+import widgets
 from serial import Serial
 from textual import on, work
 from textual.app import App, ComposeResult
-from textual.widgets import Footer
 from textual.containers import Container
 from textual.reactive import reactive, var
-
-import widgets
+from textual.widgets import Footer
 
 
 class SerViewApp(App):
@@ -104,5 +103,9 @@ class SerViewApp(App):
             await asyncio.sleep(0.1)
 
 
-if __name__ == "__main__":
+def main():
     SerViewApp().run()
+
+
+if __name__ == "__main__":
+    main()

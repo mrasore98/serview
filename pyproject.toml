@@ -4,7 +4,11 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = ["pyserial>=3.5", "textual>=6.1.0"]
+dependencies = [
+    "pyperclip>=1.9.0",
+    "pyserial>=3.5",
+    "textual>=6.1.0",
+]
 
 [project.scripts]
 serview = "app:main"

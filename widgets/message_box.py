@@ -1,10 +1,11 @@
 from datetime import datetime
 
+import pyperclip
 from rich.text import Text
 from textual.widgets import RichLog
 
 
-class SerialMessageBox(RichLog, can_focus=False):
+class SerialMessageBox(RichLog):
     """Scrollable container to record incoming and outgoing serial communication."""
 
     BORDER_TITLE = "Activity"
@@ -14,6 +15,11 @@ class SerialMessageBox(RichLog, can_focus=False):
             border: round $accent;
         }
     """
+
+    BINDINGS = [
+        ("y", "yank_contents", "Yank"),
+        ("x", "clear_contents", "Clear"),
+    ]
 
     def __init__(
         self,
@@ -44,3 +50,14 @@ class SerialMessageBox(RichLog, can_focus=False):
         )
 
         self.write(message)
+
+    def action_yank_contents(self):
+        if not self.lines:
+            self.notify("Nothing to yank!", title="Oops!", severity="error")
+            return
+        pyperclip.copy("\n".join([strip.text for strip in self.lines]))
+        self.notify(f"Copied {len(self.lines)} to clipboard", title="Yank!")
+
+    def action_clear_contents(self):
+        self.clear()
+        self.notify("Cleared the log area", title="Bye, logs!", severity="warning")

@@ -20,7 +20,10 @@ class SerViewApp(App):
     BINDINGS = [
         ("ctrl+l", "toggle_port_list", "Toggle Port List"),
         Binding("ctrl+d", "disconnect", "Disconnect", priority=True),
+        ("c", "configure_connection", "Configure"),
     ]
+
+    SCREENS = {"config_modal": widgets.ConnectionConfigModal}
 
     serial_port = var(None)
     connected = reactive(False, bindings=True)
@@ -74,15 +77,7 @@ class SerViewApp(App):
         self.notify(f"Connected to {selected_port.port_name}", title="Connected!")
 
     def action_configure_connection(self):
-        self.notify(
-            "Feature coming soon... maybe", title="NOT IMPLEMENTED", severity="warning"
-        )
-
-    async def action_next_baud_rate(self):
-        pass
-
-    async def action_prev_baud_rate(self):
-        pass
+        self.push_screen("config_modal")
 
     def watch_connected(self, connected: bool):
         if connected:

@@ -57,7 +57,7 @@ class SerialPortListView(ListView):
 
     BINDINGS = [
         ("enter", "app.connect_serial_port", "Connect"),
-        ("c", "app.configure_connection", "Configure"),
+        # ("c", "app.configure_connection", "Configure"),
     ]
 
     def on_mount(self):
